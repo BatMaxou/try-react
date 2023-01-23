@@ -2,30 +2,51 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Card from './Card';
 
-const Cities = () => {
+const Cities = (props) => {
+
+    /*
+    *
+    * Il reste 2 3 trucs à faire pour l'affichage
+    * 
+    */
+
+    function sort(data, options) {
+        if ('ASC' === options['sort']) {
+            data.sort(
+                (c1, c2) =>
+                    (c1[options['column']] > c2[options['column']] ? 1 : (c1[options['column']] < c2[options['column']]) ? -1 : 0))
+        } else if ('DESC' === options['sort']) {
+            data.sort(
+                (c1, c2) =>
+                    (c1[options['column']] < c2[options['column']] ? 1 : (c1[options['column']] > c2[options['column']]) ? -1 : 0))
+        }
+    }
 
     const [data, setData] = useState([])
 
     // se joue uniquement quand le composant est créé
     useEffect(() => {
-        axios.get("https://geo.api.gouv.fr/communes").then((result) => {
+        axios.get(`https://geo.api.gouv.fr/departements/${props.id}/communes`).then((result) => {
             setData(result.data);
         })
     }, [])
 
-    console.log(data);
+    // on balaye la mere du tableau en recuperant la clé puis sa valleur zebi
+    for (const [column, state] of Object.entries(props.sort)) {
+        if (null !== state) {
+            sort(data, { 'column': column, 'sort': state })
+        }
+    }
 
     return (
-        <div className='cities'>
-            <ul>
-                {
-                    data.map((city, index) =>
-                        // clé pour que la card soit unique dans la liste
-                        <Card key={index} type="city" city={city} />
-                    )
-                }
-            </ul>
-        </div>
+        <tbody>
+            {
+                data.map((ville, index) =>
+                    // clé pour que la card soit unique dans la liste
+                    <Card key={index} type="city" city={ville} />
+                )
+            }
+        </tbody>
     );
 };
 

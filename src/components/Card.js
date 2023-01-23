@@ -15,12 +15,22 @@ const Card = (props) => {
             </li>
         );
     }
+    else if (props.type === "departments") {
+        return (
+            <tr>
+                <td>{props.city.code}</td>
+                <td>{props.city.nom}</td>
+                <td><a href={`/departments/${props.city.code}`}>voir plus</a></td>
+            </tr>
+        );
+    }
     else if (props.type === "city") {
         return (
-            <li className="card">
-                <div className='infos'>
-                </div>
-            </li>
+            <tr>
+                <td>{props.city.codesPostaux[0]}</td>
+                <td>{props.city.nom}</td>
+                <td>{props.city.population}</td>
+            </tr>
         );
     }
 };

@@ -1,25 +1,18 @@
-import React from 'react';
 import Logo from '../components/Logo';
 import Navbar from '../components/Navbar';
-import Cities from '../components/Cities';
+import CitiesTable from '../components/CitiesTable';
+import { useParams } from "react-router-dom";
 
 const CitiesSearcher = () => {
+    // on recupere l'id depuis l'url
+    let { id } = useParams();
+
     return (
-        <div className='cities'>
+        <div>
             <Logo />
             <Navbar />
-            <h1>En Travaux</h1>
-            <img src="construction.png" alt="construction" />
-
-            <Cities />
-
-            <div>
-                <table>
-                    <th>Ville</th>
-                    <th>Département</th>
-                </table>
-            </div>
-        </div>
+            <CitiesTable id={id} />
+        </div >
     );
 };
 

@@ -9,7 +9,7 @@ const Navbar = () => {
                 <NavLink to="/" className={(nav) => (nav.isActive ? "nav-active" : "")}>
                     <li>Accueil</li>
                 </NavLink>
-                <NavLink to="/cities" className={(nav) => (nav.isActive ? "nav-active" : "")}>
+                <NavLink to="/departments" className={(nav) => (nav.isActive ? "nav-active" : "")}>
                     <li>En travaux</li>
                 </NavLink>
             </ul>
