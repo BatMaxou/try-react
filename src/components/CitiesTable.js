@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import Cities from './Cities';
 
 const CitiesTable = (props) => {
@@ -19,16 +18,16 @@ const CitiesTable = (props) => {
         setSort({ ...sort })
     }
 
-    const [sort, setSort] = useState({ 'PC': 'ASC', 'City': null, 'Pop': null })
+    const [sort, setSort] = useState({ 'codesPostaux': 'ASC', 'nom': null, 'population': null })
 
     return (
         <div>
             <table>
                 <thead>
                     <tr>
-                        <th onClick={() => { sortChoice('PC') }}>Code postal</th>
-                        <th onClick={() => { sortChoice('City') }}>Ville</th>
-                        <th onClick={() => { sortChoice('Pop') }}>Population</th>
+                        <th onClick={() => { sortChoice('codesPostaux') }}>Code postal</th>
+                        <th onClick={() => { sortChoice('nom') }}>Ville</th>
+                        <th onClick={() => { sortChoice('population') }}>Population</th>
                     </tr>
                 </thead>
                 <Cities id={props.id} sort={sort} />
